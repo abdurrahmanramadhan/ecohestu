@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecobin - Tukar Sampah, Dapat Uang!</title>
+    <style>
+      .impact-section h2 {
+  color: #21b573;
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+.impact-counters h3 {
+  font-size: 2.8rem;
+  color: #21b573;
+  margin-bottom: 8px;
+}
+.impact-counters p {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0;
+}
+
+      /* Sesuaikan elemen lain sesuai kebutuhan */
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #d0f1e6 0%, #f6fafd 100%);
+            color: #222;
+        }
+        /* Selamat Datang Overlay */
+        #welcome-overlay {
+          position: fixed;
+          z-index: 2000;
+          left: 0; top: 0; right: 0; bottom: 0;
+          background: linear-gradient(120deg, #21b573 60%, #c3e6cb 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: opacity 0.5s;
+          animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .welcome-content {
+          background: #fff;
+          padding: 40px 30px 30px 30px;
+          border-radius: 18px;
+          box-shadow: 0 8px 32px rgba(33,181,115,0.13);
+          text-align: center;
+          max-width: 350px;
+          animation: popIn 0.8s;
+        }
+        @keyframes popIn {
+          0% { transform: scale(0.8); opacity: 0; }
+          80% { transform: scale(1.05); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .welcome-content h1 {
+          color: #21b573;
+          margin-bottom: 12px;
+        }
+        #welcome-btn {
+          margin-top: 22px;
+          padding: 14px 38px;
+          background: #21b573;
+          color: #fff;
+          border: none;
+          border-radius: 28px;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: background 0.2s;
+          box-shadow: 0 2px 12px rgba(33,181,115,0.10);
+        }
+        #welcome-btn:hover {
+          background: #188f5c;
+        }
+        /* --- END Overlay --- */
+        header {
+            background: #21b573;
+            color: #fff;
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #21b573;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #188f5c;
+        }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 20px 20px 20px;
+        }
+        .hero-text {
+            flex: 1 1 350px;
+            max-width: 500px;
+        }
+        .hero-text h2 {
+            font-size: 2.2rem;
+            color: #21b573;
+            margin-bottom: 18px;
+        }
+        .hero-text p {
+            font-size: 1.15rem;
+            margin-bottom: 30px;
+        }
+        .cta-btn {
+            background: #21b573;
+            color: #fff;
+            padding: 16px 36px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 4px 16px rgba(33,181,115,0.12);
+        }
+        .cta-btn:hover {
+            background: #188f5c;
+        }
+        .hero-img {
+            flex: 1 1 320px;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-img img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: contain;
+            background: #fff;
+            box-shadow: 0 8px 32px rgba(33,181,115,0.13);
+            padding: 16px;
+        }
+        .hero-video {
+            margin-top: 30px;
+            max-width: 450px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(33,181,115,0.15);
+            display: block;
+        }
+        section {
+            max-width: 1100px;
+            margin: 60px auto 0 auto;
+            padding: 0 20px;
+        }
+        .features, .how-it-works, .testimonials, .faq, .download {
+            margin-bottom: 60px;
+        }
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .feature {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 14px rgba(33,181,115,0.07);
+            padding: 28px 22px;
+            flex: 1 1 260px;
+            max-width: 320px;
+            text-align: center;
+        }
+        .feature h3 {
+            color: #21b573;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .feature p {
+            color: #555;
+            font-size: 1rem;
+        }
+        .how-it-works-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .step {
+            background: #f6fafd;
+            border-radius: 10px;
+            padding: 18px 14px;
+            flex: 1 1 170px;
+            max-width: 220px;
+            text-align: center;
+        }
+        .step-number {
+            background: #21b573;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .testimonials-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .testimonial {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(33,181,115,0.06);
+            padding: 20px 16px;
+            flex: 1 1 220px;
+            max-width: 320px;
+        }
+        .testimonial p {
+            font-style: italic;
+            color: #444;
+        }
+        .testimonial .user {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #21b573;
+        }
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            margin-bottom: 18px;
+        }
+        .faq-item h4 {
+            margin: 0 0 6px 0;
+            color: #21b573;
+        }
+        .faq-item p {
+            margin: 0;
+            color: #555;
+        }
+        .download {
+            text-align: center;
+        }
+        .download-buttons {
+            margin-top: 18px;
+        }
+        .download-btn {
+            display: inline-block;
+            margin: 0 10px;
+            background: #21b573;
+            color: #fff;
+            padding: 12px 26px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #188f5c;
+        }
+        /* Countdown Promo */
+        .promo-section {
+            text-align: center;
+            background:#21b573;
+            color:#fff;
+            padding:30px 20px 20px 20px;
+            border-radius: 18px;
+            margin: 40px auto 0 auto;
+            max-width: 800px;
+            box-shadow: 0 2px 18px rgba(33,181,115,0.08);
+        }
+        .promo-section h2 {
+            margin-bottom: 10px;
+        }
+        #countdown {
+            font-size:2rem;
+            font-weight:bold;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+        /* Newsletter */
+        .newsletter-section {
+            background:#f0f9f4;
+            padding:40px 20px;
+            text-align:center;
+            border-radius: 18px;
+            margin: 40px auto 0 auto;
+            max-width: 800px;
+            box-shadow: 0 2px 18px rgba(33,181,115,0.05);
+        }
+        .newsletter-section input[type="email"] {
+            padding:12px;
+            width:250px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            font-size:1rem;
+        }
+        .newsletter-section button {
+            padding:12px 28px;
+            background:#21b573;
+            color:#fff;
+            border:none;
+            border-radius:25px;
+            margin-left:10px;
+            cursor:pointer;
+            font-size:1rem;
+            transition: background 0.2s;
+        }
+        .newsletter-section button:hover {
+            background: #188f5c;
+        }
+        .newsletter-section #newsletterMessage {
+            margin-top:15px;
+            color:#21b573;
+        }
+        .newsletter-section {
+            background:#f0f9f4;
+            padding:40px 20px;
+            text-align:center;
+            border-radius: 18px;
+            margin: 40px auto 0 auto;
+            max-width: 800px;
+            box-shadow: 0 2px 18px rgba(33,181,115,0.05);
+        }
+
+        .newsletter-section input[type="Whatsapp"] {
+            padding:12px;
+            width:250px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            font-size:1rem;
+        }
+        .newsletter-section button {
+            padding:12px 28px;
+            background:#21b573;
+            color:#fff;
+            border:none;
+            border-radius:25px;
+            margin-left:10px;
+            cursor:pointer;
+            font-size:1rem;
+            transition: background 0.2s;
+        }
+        .newsletter-section button:hover {
+            background: #188f5c;
+        }
+        .newsletter-section #newsletterMessage {
+            margin-top:15px;
+            color:#21b573;
+        }
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: none;
+            background-color: #21b573;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            font-size: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(33,181,115,0.3);
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+        #backToTop:hover {
+            background-color: #188f5c;
+        }
+        footer {
+            background: #21b573;
+            color: #fff;
+            text-align: center;
+            padding: 24px 0 12px 0;
+            margin-top: 40px;
+        }
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .features-list, .testimonials-list, .how-it-works-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-img img {
+                width: 160px;
+                height: 160px;
+            }
+            .hero-video {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay Selamat Datang -->
+    <div id="welcome-overlay">
+      <div class="welcome-content">
+        <!-- LOGO SVG ECObin -->
+        <svg id="ecobin-logo" xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110" style="display:block; margin:0 auto 18px auto;">
+        <circle cx="55" cy="55" r="52" fill="#e6f7f1" stroke="#21b573" stroke-width="6"/>
+        <path d="M35 75 Q55 95 75 75 Q95 55 75 35 Q55 15 35 35" fill="#a8e6cf" stroke="#21b573" stroke-width="4"/>
+        <path d="M35 35 Q55 55 75 35" fill="none" stroke="#21b573" stroke-width="4" stroke-linecap="round"/>
+        <path d="M35 75 Q55 55 75 75" fill="none" stroke="#21b573" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="55" cy="55" r="11" fill="#21b573" opacity="0.8"/>
+        <text x="55" y="62" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="26" fill="#fff" font-weight="bold">E</text>
+        </svg>
+
+      <h1>Selamat Datang di Ecobin!</h1>
+        <p>Ubah sampahmu jadi uang & hadiah, mulai sekarang juga.<br>
+          Bersama Ecobin, #HijaukanBumi, #BeraniDaurUlang</p>
+        <button id="welcome-btn">Masuk ke Website</button>
+      </div>
+    </div>
+    <!-- END Overlay -->
+
+    <header>
+        <h1>Ecobin</h1>
+        <p>Aplikasi Tukar Sampah Daur Ulang Jadi Uang & Hadiah</p>
+        <nav>
+            <a href="#fitur">Fitur</a>
+            <a href="#cara">Cara Kerja</a>
+            <a href="#testimoni">Testimoni</a>
+            <a href="#faq">FAQ</a>
+            <a href="#download">Download</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-text">
+            <h2>Ubah Sampahmu Jadi Uang & Hadiah!</h2>
+            <p>
+                Ecobin adalah aplikasi inovatif yang memudahkan kamu menukar sampah daur ulang menjadi uang tunai, pulsa, atau berbagai hadiah menarik. Dukung lingkungan, dapatkan keuntungan!
+            </p>
+            <a href="#download" class="cta-btn">Coba Sekarang</a>
+            <!-- Video Tutorial Pemakaian Ecobin -->
+            <video class="hero-video" controls poster="https://cdn-icons-png.flaticon.com/512/2909/2909769.png">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Browser Anda tidak mendukung video.
+            </video>
+        </div>
+        <div class="hero-img">
+            <!-- LOGO SVG ECObin -->
+            <div class="hero-img">
+              <!-- SVG LOGO ECObin diperbesar -->
+              <svg id="ecobin-logo" xmlns="http://www.w3.org/2000/svg" width="260" height="260" viewBox="0 0 110 110" style="display:block; margin:0 auto;">
+                <circle cx="55" cy="55" r="52" fill="#e6f7f1" stroke="#21b573" stroke-width="6"/>
+                <path d="M35 75 Q55 95 75 75 Q95 55 75 35 Q55 15 35 35" fill="#a8e6cf" stroke="#21b573" stroke-width="4"/>
+                <path d="M35 35 Q55 55 75 35" fill="none" stroke="#21b573" stroke-width="4" stroke-linecap="round"/>
+                <path d="M35 75 Q55 55 75 75" fill="none" stroke="#21b573" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="55" cy="55" r="11" fill="#21b573" opacity="0.8"/>
+                <text x="55" y="62" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="68" fill="#fff" font-weight="bold">E</text>
+              </svg>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Countdown Promo Section -->
+    <section class="promo-section">
+      <h2>Promo Tukar Sampah Dapat Bonus Ganda!</h2>
+      <p>Promo berakhir dalam:</p>
+      <div id="countdown"></div>
+    </section>
+
+    <section class="features" id="fitur">
+        <h2 style="text-align:center;">Fitur Unggulan Ecobin</h2>
+        <div class="features-list">
+            <div class="feature">
+                <h3>Tukar Sampah Jadi Uang</h3>
+                <p>Pilah sampah anorganik, plastik, kertas, elektronik, dan tukarkan langsung jadi saldo Ecobin yang bisa dicairkan ke rekening atau e-wallet.</p>
+            </div>
+            <div class="feature">
+                <h3>Penjemputan Sampah</h3>
+                <p>Ecobin menyediakan layanan jemput sampah ke rumah atau kantor, cukup atur jadwal dan lokasi lewat aplikasi.</p>
+            </div>
+            <div class="feature">
+                <h3>Poin & Reward</h3>
+                <p>Setiap transaksi dapat poin yang bisa ditukar pulsa, paket data, token listrik, voucher belanja, atau hadiah menarik lainnya.</p>
+            </div>
+            <div class="feature">
+                <h3>Edukasi Lingkungan</h3>
+                <p>Dapatkan artikel, tips, dan berita terbaru seputar pengelolaan sampah & gaya hidup ramah lingkungan.</p>
+            </div>
+            <div class="feature">
+                <h3>Tracking & Laporan</h3>
+                <p>Lihat riwayat penukaran, total sampah yang sudah didaur ulang, serta dampak positif yang telah kamu berikan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="cara">
+        <h2 style="text-align:center;">Cara Kerja Ecobin</h2>
+        <div class="how-it-works-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <b>Download & Daftar</b>
+                <p>Unduh aplikasi Ecobin dan daftar akun dengan mudah.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <b>Pilah & Kumpulkan Sampah</b>
+                <p>Pilah sampah sesuai kategori (plastik, kertas, elektronik, dll).</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <b>Atur Penjemputan</b>
+                <p>Tentukan jadwal dan lokasi penjemputan lewat aplikasi.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <b>Dapatkan Uang & Poin</b>
+                <p>Sampah ditimbang, saldo & poin langsung masuk ke akunmu.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <b>Tukar Hadiah</b>
+                <p>Cairkan saldo ke rekening, e-wallet, atau tukar dengan hadiah menarik.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section" id="impact" style="text-align:center; padding:50px 20px; background:#e6f7f1; border-radius:18px; max-width:900px; margin:60px auto;">
+      <h2>Impact Ecobin</h2>
+      <div class="impact-counters" style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:30px;">
+        <div>
+          <h3 class="counter" data-target="12500">0</h3>
+          <p>Kg Sampah Didaur Ulang</p>
+        </div>
+        <div>
+          <h3 class="counter" data-target="8500">0</h3>
+          <p>Pengguna Terdaftar</p>
+        </div>
+        <div>
+          <h3 class="counter" data-target="3200">0</h3>
+          <p>Hadiah Terbagi</p>
+        </div>
+      </div>
+    </section>    
+    
+
+    <section class="testimonials" id="testimoni">
+        <h2 style="text-align:center;">Apa Kata Pengguna Ecobin?</h2>
+        <div class="testimonials-list">
+            <div class="testimonial">
+                <p>“Ecobin bikin pilah sampah jadi gampang dan bermanfaat. Saldo langsung masuk, prosesnya cepat!”</p>
+                <div class="user">- Andong, Jakarta</div>
+            </div>
+            <div class="testimonial">
+                <p>“Saya suka fitur edukasinya, jadi makin paham pentingnya daur ulang. Plus dapat pulsa gratis!”</p>
+                <div class="user">- Ega, Bandung</div>
+            </div>
+            <div class="testimonial">
+                <p>“Penjemputan sampahnya tepat waktu, aplikasi user-friendly. Sangat direkomendasikan.”</p>
+                <div class="user">- Guntur, Surabaya</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <h2 style="text-align:center;">Pertanyaan yang Sering Diajukan</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h4>Jenis sampah apa yang bisa ditukar di Ecobin?</h4>
+                <p>Ecobin menerima sampah anorganik seperti plastik, kertas, kardus, logam, elektronik, dan minyak jelantah.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Bagaimana cara penjemputan sampah?</h4>
+                <p>Kamu bisa atur jadwal dan lokasi penjemputan lewat aplikasi. Tim Ecobin akan datang sesuai waktu yang dipilih.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Bagaimana proses penukaran sampah menjadi uang?</h4>
+                <p>Sampah akan ditimbang, kemudian saldo akan masuk ke akun Ecobin. Saldo bisa dicairkan ke rekening bank atau e-wallet.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Apakah ada minimal berat sampah untuk dijemput?</h4>
+                <p>Ya, minimal berat sampah untuk penjemputan adalah 3 kg.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+      <h2>Berlangganan Info Terbaru Ecobin</h2>
+      <p>Dapatkan tips daur ulang dan promo menarik langsung ke email/wa Anda.</p>
+
+      <form id="Email" style="max-width: 320px; margin: 20px auto 0 auto; text-align: center;">
+        <label for="Email" style="display:block; margin-bottom:8px; color:#21b573; font-weight:bold;">Masukkan Nomor Email Anda:</label>
+        <input type="email" id="emailInput" placeholder="Masukkan email Anda" required
+               style="width: 250px; padding: 12px; border-radius: 25px; border: 1px solid #ccc; font-size: 1rem;">
+        <button type="submit"
+        style="padding: 12px 28px; background: #21b573; color: #fff; border: none; border-radius: 25px; margin-left: 10px; cursor: pointer; font-size: 1rem; margin-top: 12px;">
+          Daftar
+        </button>
+        <p id="newsletterMessage"></p>
+      </form>
+      
+      <form id="waForm" style="max-width: 320px; margin: 20px auto 0 auto; text-align: center;">
+        <label for="waNumber" style="display:block; margin-bottom:8px; color:#21b573; font-weight:bold;">Masukkan Nomor WhatsApp Anda:</label>
+        <input type="tel" id="waNumber" placeholder="Contoh: 081234567890" required
+               style="width: 250px; padding: 12px; border-radius: 25px; border: 1px solid #ccc; font-size: 1rem;">
+        <button type="submit"
+                style="padding: 12px 28px; background: #21b573; color: #fff; border: none; border-radius: 25px; margin-left: 10px; cursor: pointer; font-size: 1rem; margin-top: 12px;">
+          Daftar
+        </button>
+        <p id="waMessage" style="margin-top: 15px; color: #21b573; font-weight: bold;"></p>
+      </form>
+      
+    </section>
+
+    <section class="download" id="download">
+        <h2>Download Ecobin Sekarang</h2>
+        <p>Mulai ubah sampahmu jadi uang dan hadiah. Dukung lingkungan, dapatkan keuntungan!</p>
+        <div class="download-buttons">
+            <a href="#" class="download-btn">Google Play</a>
+            <a href="#" class="download-btn">App Store</a>
+        </div>
+    </section>
+
+    <button id="backToTop" title="Kembali ke atas">↑</button>
+
+    <footer>
+        <div>
+            &copy; 2025 Ecobin | PT Ecobin Kelompok 5<br>
+            Email: info@ecobin.co.id | IG: @ecobin.id | Telp: 021-12345678
+        </div>
+    </footer>
+
+    <!-- SCRIPT: Smooth Scroll, Back To Top, Countdown, Newsletter, Welcome Overlay -->
+    <script>
+      // Overlay Selamat Datang
+      document.getElementById('welcome-btn').onclick = function() {
+        document.getElementById('welcome-overlay').style.opacity = 0;
+        setTimeout(function() {
+          document.getElementById('welcome-overlay').style.display = 'none';
+        }, 500);
+      };
+      setTimeout(function() {
+        if (document.getElementById('welcome-overlay')) {
+          document.getElementById('welcome-overlay').style.opacity = 0;
+          setTimeout(function() {
+            if (document.getElementById('welcome-overlay')) {
+              document.getElementById('welcome-overlay').style.display = 'none';
+            }
+          }, 500);
+        }
+      }, 3000);
+
+      // Smooth scroll for navigation
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Back To Top button
+      const backToTopButton = document.getElementById('backToTop');
+      window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+          backToTopButton.style.display = "block";
+        } else {
+          backToTopButton.style.display = "none";
+        }
+      };
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+
+      // Countdown Timer
+      const promoEnd = new Date("May 30, 2025 23:59:59").getTime();
+      const countdownEl = document.getElementById('countdown');
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = promoEnd - now;
+        if (distance < 0) {
+          clearInterval(timer);
+          countdownEl.innerHTML = "Promo telah berakhir";
+          return;
+        }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }, 1000);
+
+      // Newsletter
+      // Form Newsletter
+const form = document.getElementById('newsletterForm');
+const emailInput = document.getElementById('emailInput');
+const message = document.getElementById('newsletterMessage');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = emailInput.value.trim();
+
+  // Validasi email sederhana menggunakan regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailRegex.test(email)) {
+    message.style.color = '#21b573'; // hijau
+    message.textContent = "Terima kasih telah berlangganan!";
+    emailInput.value = "";
+  } else {
+    message.style.color = '#d9534f'; // merah
+    message.textContent = "Mohon masukkan email yang valid.";
+  }
+});
+
+const waForm = document.getElementById('waForm');
+const waNumberInput = document.getElementById('waNumber');
+const waMessage = document.getElementById('waMessage');
+
+waForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const waNumber = waNumberInput.value.trim().replace(/\D/g, ''); // hanya angka
+
+  const validNumber = /^\d{10,15}$/;
+  if (validNumber.test(waNumber)) {
+    waMessage.style.color = '#21b573';
+    waMessage.textContent = "Terima kasih! Pesan WhatsApp akan segera dikirim.";
+    waNumberInput.value = "";
+    // window.open(`https://wa.me/62${waNumber.replace(/^0/, '')}`, '_blank');
+  } else {
+    waMessage.style.color = '#d9534f';
+    waMessage.textContent = "Mohon masukkan nomor WhatsApp yang valid (10-15 digit angka).";
+  }
+});
+
+
+
+      // Cek preferensi sebelumnya
+    </script>
+    <script>
+      const counters = document.querySelectorAll('.counter');
+      const speed = 200; // kecepatan animasi
+    
+      counters.forEach(counter => {
+        const animate = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText.replace(/\D/g,'');
+          const increment = target / speed;
+    
+          if(count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(animate, 20);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
+    
+        // Trigger animasi saat elemen muncul di viewport
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting) {
+              animate();
+              observer.unobserve(counter);
+            }
+          });
+        }, { threshold: 1 });
+    
+        observer.observe(counter);
+      });
+    </script>
+    
+</body>
+</html>
